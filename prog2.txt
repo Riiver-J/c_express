@@ -1,43 +1,29 @@
+#include <string.h>
 #include <stdio.h>
 
-int add(int a, int b);
-int mult(int a, int b);
-int subt(int a, int b);
+#define SIZE 100
+
+int str_chr(char* s, char c)
+{
+	int i;
+	int count = 0;
+	for (i = 0; i < (int) strlen(s); i++) {
+		if (s[i] == c)
+			count++;
+	}
+	return count;
+}
 
 int main(void)
 {
-	int m = 3, n = 5;
-	char* ops = "*+-";
-	char op;
-	int (*pfunary[3])(int, int);
-	
-	pfunary[0] = add;
-	pfunary[1] = mult;
-	pfunary[2] = subt;
+	char str[SIZE];
+	char ch;
 
-	while (op = *ops++)
-		switch (op)
-		{
-		case '+': printf("%c 결과: %d\n", op, pfunary[0](m, n));
-			break;
-		case '-': printf("%c 결과: %d\n", op, pfunary[2](m, n));
-			break;
-		case '*': printf("%c 결과: %d\n", op, pfunary[1](m, n));
-			break;
-		}
+	printf("문자열을 입력하시오: ");
+	gets_s(str, SIZE);
 
+	printf("개수를 셀 문자를 입력하시오: ");
+	ch = (char)getchar();
+	printf("%c의 개수: %d \n", ch, str_chr(str, ch));
 	return 0;
-}
-
-int add(int a, int b)
-{
-	return a + b;
-}
-int mult(int a, int b)
-{
-	return a * b;
-}
-int subt(int a, int b)
-{
-	return a - b;
 }
