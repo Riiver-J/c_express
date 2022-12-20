@@ -1,38 +1,27 @@
+#include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef struct contacts {	// 구조체 타입 정의
-	char name[100];
-	char mobile_phone[100];
-} CONTACTS;
+#define SIZE 100
+
+void str_upper(char* s)
+{
+	int i, count = 0;
+	
+	for (i = 0; i < strlen(s); i++) {
+		if (s[i] >= 'a' && s[i] <= 'z')
+			s[i] = s[i] - 'a' + 'A';
+	}
+}
 
 int main(void)
 {
-	CONTACTS* contacts;	// 동적 메모리 공간을 가리키는 포인터
-	int size, i;
+	char str[SIZE];
 
-	printf("주소의 개수: ");
-	scanf("%d", &size);
-	getchar();
+	printf("문자열을 입력하시오: ");
+	gets_s(str, SIZE);
 
-	contacts = (CONTACTS*)malloc(sizeof(CONTACTS) * size);	// 동적 메모리 할당
-	if (contacts == NULL) {
-		printf("동적 메모리 할당 오류");
-		exit(1);
-	}
-
-	for (i = 0; i < size; i++) {
-		printf("이름을 입력하시오: ");
-		gets_s(contacts[i].name, 100);
-		printf("휴대폰 번호를 입력하시오: ");
-		gets_s(contacts[i].mobile_phone, 100);
-	}
-	printf("==============================\n");
-	printf("이름		휴대폰 번호\n");
-	printf("==============================\n");
-	for (i = 0; i < size; i++)
-		printf("%s %s \n", contacts[i].name, contacts[i].mobile_phone);
-	printf("\n==============================\n");
-	free(contacts);			// 동적 메모리 공간 해제
+	str_upper(str);
+	printf("변환된 문자열: %s\n", str);
+	
 	return 0;
 }
