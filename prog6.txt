@@ -1,43 +1,33 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
+#include <conio.h>
 
 int main(void)
 {
-	FILE* fp1, * fp2;
-	char file1[100], file2[100];
-	char c;
-
-	printf("첫번째 파일 이름:  ");
-	scanf("%s", file1);
-
-	printf("두번째 파일 이름:  ");
-	scanf("%s", file2);
-
-	// 첫번째 파일을 읽기 모드로 연다.
-	if ((fp1 = fopen(file1, "r")) == NULL)
+	char seps[] = " ";
+	char s[200], find[100], replace[100], target[200] = "";
+	char* token;
+	
+	printf("문자열을 입력하시오: ");
+	gets_s(s, 200);
+	printf("찾을 문자열: ");
+	gets_s(find, 100);
+	printf("바꿀 문자열: ");
+	gets_s(replace, 100);
+	
+	token = strtok(s, seps);	 // 문자열에서 첫번째 토큰을 얻는다. 
+	while (token != NULL)
 	{
-		fprintf(stderr, "파일 %s을 열 수 없습니다.\n", file1);
-		exit(1);
-	}
+		if (strcmp(token, find) == 0)
+			strcat(target, replace);
+		else
+			strcat(target, token);
+		
+		token = strtok(NULL, seps); // 다음 토큰을 얻는다. 
+		strcat(target, " ");
 
-	// 두번째 파일을 쓰기 모드로 연다.
-	if ((fp2 = fopen(file2, "w")) == NULL)
-	{
-		fprintf(stderr, "파일 %s을 열 수 없습니다.\n", file2);
-		exit(1);
 	}
-
-	// 첫 번째 파일의 문자들을 모두 대문자로 변경하여 두 번째 파일에 저장
-	while (1) {
-		c = fgetc(fp1);
-		if (c == EOF)
-			break;
-		fputc(toupper(c), fp2);
-		printf("%c", toupper(c));
-	}
-	fclose(fp1);
-	fclose(fp2);
+	
+	printf("수정된 문자열: %s\n", target);
 	return 0;
 }
