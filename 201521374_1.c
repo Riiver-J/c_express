@@ -1,28 +1,97 @@
-#include <stdio.h>  // printf,scanfì‚¬ìš©ì„ ìœ„í•œ header
-int main(void)  // main ì‹œì‘
+#include<stdio.h>	// Ç¥ÁØ ÀÔÃâ·Â ¶óÀÌºê·¯¸®
+#include<windows.h>	// ½Ã½ºÅÛ ÄÜ¼Ö Çì´õ
+#include<stdlib.h>	// ³­¼ö»ı¼º
+#include<time.h>	// randÇÔ¼ö »ç¿ë
+#include<conio.h>	// getch()ÇÔ¼ö »ç¿ëÀ» À§ÇÑ Çì´õ
+
+void gotoxy(int x, int y);
+
+#define randomize() srand((unsigned)time(NULL)	// ÀÚµ¿À¸·Î ³­¼ö¹ß»ı±â ÃÊ±âÈ­, ¸ÅÅ©·ÎÇÔ¼ö
+#define random(n) (rand()%(n))	// ³­¼öÀÇ ¹üÀ§¸¦ ÃÊ±âÈ­, ¸ÅÅ©·ÎÇÔ¼ö
+#define MAXFLOWER 2000
+#define delay(n) Sleep(n)
+
+typedef struct // ±¸Á¶Ã¼ Á¤ÀÇ
 {
-    char season=0; // ë¬¸ìí˜•íƒœë¡œ ì…ë ¥ë°›ì„ê²ƒì´ë¯€ë¡œ char & ë³€ìˆ˜ ì´ˆê¸°í™”
-    printf("ê³¼ì¼ì„ ì¶”ì²œë°›ê³ ì‹¶ì€ ê³„ì ˆì„ ë‹¤ìŒì˜ ì•ŒíŒŒë²³ìœ¼ë¡œ ì…ë ¥í•´ì£¼ì„¸ìš”.(ë´„=S,ì—¬ë¦„=M,ê°€ì„=F,ê²¨ìš¸=W): ");  // ì§€ì‹œì‚¬í•­
-    scanf("%c", &season);   // charë¥¼ seasonì— ì €ì¥
-    switch(season)  // switchë¬¸ ì‹œì‘
-    {
-    case 'S' :  // ì‚¬ìš©ìê°€ ëŒ€ë¬¸ì 'S'ë¥¼ ì…ë ¥ì‹œ
-    case 's' :  // ì‚¬ìš©ìê°€ ì†Œë¬¸ì 's'ë¥¼ ì…ë ¥ì‹œ
-        printf("ë´„ì— ì–´ìš¸ë¦¬ëŠ” ì œì² ê³¼ì¼ì€ ë”¸ê¸°,í•œë¼ë´‰,ë§¤ì‹¤ì…ë‹ˆë‹¤."); // ì¶”ì²œìŒì‹ ì¶œë ¥
-        break;  // switchë¬¸ ë¹ ì ¸ë‚˜ì˜´
-    case 'M' :  // ì‚¬ìš©ìê°€ ëŒ€ë¬¸ì 'M'ë¥¼ ì…ë ¥ì‹œ
-    case 'm' :  // ì‚¬ìš©ìê°€ ì†Œë¬¸ì 'm'ë¥¼ ì…ë ¥ì‹œ
-        printf("ì—¬ë¦„ì— ì–´ìš¸ë¦¬ëŠ” ì œì² ê³¼ì¼ì€ ì°¸ì™¸,ë³µìˆ­ì•„,ìë‘,ìˆ˜ë°•,í¬ë„ì…ë‹ˆë‹¤."); // ì¶”ì²œìŒì‹ ì¶œë ¥
-        break;  // switchë¬¸ ë¹ ì ¸ë‚˜ì˜´
-    case 'F' :  // ì‚¬ìš©ìê°€ ëŒ€ë¬¸ì 'F'ë¥¼ ì…ë ¥ì‹œ
-    case 'f' :  // ì‚¬ìš©ìê°€ ì†Œë¬¸ì 'f'ë¥¼ ì…ë ¥ì‹œ
-        printf("ê°€ì„ì— ì–´ìš¸ë¦¬ëŠ” ì œì² ê³¼ì¼ì€ ë¸”ë£¨ë² ë¦¬,ë°°,ì„ë¥˜,ì‚¬ê³¼ì…ë‹ˆë‹¤."); // ì¶”ì²œìŒì‹ ì¶œë ¥
-        break;  // switchë¬¸ ë¹ ì ¸ë‚˜ì˜´
-    case 'W' :  // ì‚¬ìš©ìê°€ ëŒ€ë¬¸ì 'W'ë¥¼ ì…ë ¥ì‹œ
-    case 'w' :  // ì‚¬ìš©ìê°€ ì†Œë¬¸ì 'w'ë¥¼ ì…ë ¥ì‹œ
-        printf("ê²¨ìš¸ì— ì–´ìš¸ë¦¬ëŠ” ì œì² ê³¼ì¼ì€ ìœ ì,ê·¤,ì„ë¥˜ì…ë‹ˆë‹¤."); // ì¶”ì²œìŒì‹ ì¶œë ¥
-        break;  // switchë¬¸ ë¹ ì ¸ë‚˜ì˜´
-    default :   // ì´ì™¸ì˜ ì…ë ¥ê°’ì¼ê²½ìš°
-        printf("ì˜¬ë°”ë¥´ì§€ ì•Šì€ í˜•ì‹ì…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");  // ì˜ˆì™¸ì²˜ë¦¬
-    }
-}       
+	BOOL exist;	// Á¸Àç ¿©ºÎ ¼³Á¤
+	char ch;	// Ãâ·ÂÇÒ ¹®ÀÚ
+	int x, y;	// ÇöÀç ÁÂÇ¥
+	int distance;	//ÀÌµ¿ÇÒ °Å¸®
+	int nFrame;	// ¼Óµµ
+	int nStay;	// ¼Óµµ ÅëÁ¦
+} Flower;	// ±¸Á¶Ã¼ Á¤ÀÇ
+
+Flower F[MAXFLOWER];	// ±¸Á¶Ã¼ ¹è¿­
+
+void gotoxy(int x, int y)
+{
+	COORD pos = { x,y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+int main()	// mainÇÔ¼ö
+{
+	int lotto = 2;	// ·£´ıÀ¸·Î ²É »ı¼ºÈ®·ü, ÃÊ±âÈ­
+	int frame = 200;
+	int i;
+
+	randomize();
+
+	system("mode con cols=120 lines=20"); //cols = Ä­/Çà (°¡·Î)  lines = ÁÙ/¿­ (¼¼·Î)
+
+	while (1) 
+	{
+		if (random(lotto) == 0)	// È®·ü¸¶´Ù ²É »ı¼º
+		{
+			for (i = 0; i < MAXFLOWER; i++)
+			{
+				if (F[i].exist == FALSE)
+				{
+					F[i].exist = TRUE;
+					F[i].ch = '@';
+					F[i].x = random(120);
+					F[i].y = random(20);
+					F[i].distance = random(8) + 5;
+					F[i].nFrame = F[i].nStay = random(15) + 5;
+					break;
+				}
+			}
+		}
+
+		for (i = 0; i < MAXFLOWER; i++)
+		{
+			if (F[i].exist == FALSE)	// ²ÉÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é
+				continue;	// ´Ù½Ã µ¹¾Æ°£´Ù
+			if (--F[i].nStay == 0)	// ÁÖ±â°¡ 0ÀÌ µÇ¸é
+			{
+				F[i].nStay = F[i].nFrame;	// À§Ä¡¸¦ °ø¹éÀ¸·Î Áö¿î´Ù
+				gotoxy(F[i].x, F[i].y);	
+				_putch('  ');
+				
+				if (++F[i].y < F[i].distance)
+				{
+					if (random(2) == 0)
+					{
+						++F[i].x;
+					}
+					else
+					{
+						--F[i].x;
+					}
+
+					gotoxy(F[i].x, F[i].y);
+					_putch(F[i].ch);
+				}
+				else
+				{
+					F[i].exist = FALSE;
+				}
+			}
+		}
+		delay(1000 / frame);
+	}
+
+	_getch();
+	return 0;
+	
+}
